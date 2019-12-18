@@ -1,0 +1,58 @@
+# web port
+server:
+  port: 8081
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/batchquartzdb?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&serverTimezone=UTC
+    username: root
+    password: fhqiqpl201
+  batch:
+    job:
+      enabled: false
+
+#http相关配置
+#1: 最大连接数
+http:
+  config:
+    maxTotalConnect: 200
+    #默认的每个路由的最大连接数
+    maxConnectPerRoute: 100
+    #连接超时时间
+    connectTimeout: 5
+    #读取数据超时时间
+    readTimeout: 30
+    #从池中获取连接超时时间
+    connectionRequestTimeout: 1
+    #请求失败最大重试次数
+    retryCount: 3
+    #哪些异常可以尝试重试
+    retryExceptions: InterruptedIOException,UnknownHostException
+    #一个连接处于idle状态多久后会被清理
+    maxIdleTime: 30
+
+### xxl-job admin address list, such as "http://address" or "http://address01,http://address02"
+xxl:
+  job:
+    admin:
+      addresses: http://127.0.0.1:8080/xxl-job-admin
+    ### xxl-job executor address
+    executor:
+      appname: xxl-job-executor-practise
+      ip:
+      port: 9999
+      ### xxl-job log path
+      logpath: /data/applogs/xxl-job/jobhandler
+      ### xxl-job log retention days
+      logretentiondays: 30
+    ### xxl-job, access token
+    accessToken:
+## 该配置节点为独立的节点，有很多同学容易将这个配置放在spring的节点下，导致配置无法被识别
+mybatis:
+  mapper-locations: classpath:dao/*.xml  #注意：一定要对应mapper映射xml文件的所在路径
+  type-aliases-package: pn.lyndon.batch.user.entity # 注意：对应实体类的路径
+  configuration:
+    use-column-label: true #使用列别名 默认true
+    use-generated-keys: true #useGeneratedKeys
+    map-underscore-to-camel-case: true #mapUnderscoreToCamelCase
