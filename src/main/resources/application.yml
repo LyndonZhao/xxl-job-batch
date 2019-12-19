@@ -7,7 +7,7 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://127.0.0.1:3306/batchquartzdb?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&serverTimezone=UTC
     username: root
-    password: fhqiqpl201
+    password: rootpw
   batch:
     job:
       enabled: false
